@@ -25,7 +25,7 @@ public class Genre {
     private String genreName;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "genres", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
     private Set<Book> books = new LinkedHashSet<>();
 }
 

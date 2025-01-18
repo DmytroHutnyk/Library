@@ -27,7 +27,7 @@ public class Author {
     private String lastName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private Set<Book> books = new LinkedHashSet<>();
 
 
