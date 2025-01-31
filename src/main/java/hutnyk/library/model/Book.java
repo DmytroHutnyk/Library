@@ -1,5 +1,6 @@
 package hutnyk.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "book_genre",

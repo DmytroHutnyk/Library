@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit from</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        label {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        input[type="email"],
+        input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+        }
+
+        button.save-button,
+        a.cancel-button {
+            background-color: #ffdd00;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex: 1;
+        }
+
+        button.save-button:hover,
+        a.cancel-button:hover {
+            background-color: #aa992e;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="/menu/add/save-book" th:object="${book}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" placeholder="Enter title" required />
+
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" th:field="*{isbn}" placeholder="Enter ISBN" required />
+
+    <label for="publicationYear">Publication Year:</label>
+    <input type="number" id="publicationYear" th:field="*{publicationYear}" placeholder="Enter year" required />
+
+    <label for="authorFirstName">Author First Name:</label>
+    <input type="text" id="authorFirstName" th:field="*{authorFirstName}" placeholder="Enter author's first name" required />
+
+    <label for="authorLastName">Author Last Name:</label>
+    <input type="text" id="authorLastName" th:field="*{authorLastName}" placeholder="Enter author's last name" required />
+
+    <label for="publisherName">Publisher:</label>
+    <input type="text" id="publisherName" th:field="*{publisherName}" placeholder="Enter publisher" required />
+
+    <div class="form-buttons">
+        <button type="submit" class="save-button">Save</button>
+        <a href="/menu" class="cancel-button">Cancel</a>
+    </div>
+</form>
+</body>
+
+</html>

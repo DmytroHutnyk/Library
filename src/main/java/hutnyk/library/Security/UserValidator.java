@@ -1,19 +1,16 @@
 package hutnyk.library.Security;
 
-import hutnyk.library.Service.IUserService;
+import hutnyk.library.Service.Interface.IUserService;
 import hutnyk.library.model.User;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-@Getter
-@Setter
+
 @RequiredArgsConstructor
 @Component
 public class UserValidator implements Validator {
-    private IUserService userService;
+    private final IUserService userService;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -24,11 +21,11 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
 
-        if(userService.findByUsername(user.getUsername()).isEmpty())
+        if(userService.findByUsername(user.getUsername()).isPresent())
             errors.rejectValue("username", "", "User with such username already exists");
 
 
-        if(userService.findByEmail(user.getEmail()).isEmpty())
+        if(userService.findByEmail(user.getEmail()).isPresent())
             errors.rejectValue("email", "", "User with such email already exists");
     }
 }

@@ -22,7 +22,7 @@ public class Role {
     private Long id;
 
     @NotBlank(message = "Role can not be blank")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)

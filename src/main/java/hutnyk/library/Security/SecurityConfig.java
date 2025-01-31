@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -17,12 +19,19 @@ public class SecurityConfig {
 
 
     @Bean
-    @SneakyThrows
-    public SecurityFilterChain filterChain(HttpSecurity http){
-        http.authorizeHttpRequests(authorizeRequest ->
+
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http.csrf(csrf -> csrf
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        )
+                .authorizeHttpRequests(authorizeRequest ->
                         authorizeRequest
-                        .requestMatchers("/", "/auth").permitAll()
-                        .anyRequest().authenticated()
+                         .requestMatchers("/menu/admin/**").hasRole("ADMIN")
+                         .requestMatchers("/menu/delete/**").hasAnyRole("LIBRARIAN", "ADMIN")
+                         .requestMatchers("/menu/edit/**").hasAnyRole("PUBLISHER", "LIBRARIAN", "ADMIN")
+                         .requestMatchers("/menu/add/**").hasAnyRole("READER", "PUBLISHER", "LIBRARIAN", "ADMIN")
+                         .requestMatchers("/", "/auth", "/auth/**").permitAll()
+                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/auth/login")
@@ -32,11 +41,14 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("auth/logout")
-                        .logoutSuccessUrl("auth/login")
-                );
-//        http.exceptionHandling()
-//                .accessDeniedPage("/auth/access-denied"); // Custom access denied page
+                        .logoutUrl("/auth/logout")
+                        .logoutSuccessUrl("/")
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedPage("/403")
+                );;
+
 
         return http.build();
 
@@ -49,12 +61,9 @@ public class SecurityConfig {
     }
 
 
-//
-//    @Bean
-//    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return web -> web.ignoring().requestMatchers("/somePath", "/somePath");
-//    }
-
-
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
 
 }

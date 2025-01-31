@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        button {
+            background-color: #ffdd00;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #aa992e;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ffdd00;
+            color: black;
+            font-weight: bold;
+        }
+
+        td {
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-buttons">
+    <form action="/auth/registrationReader" method="get">
+        <button type="submit">Register for Reader</button>
+    </form>
+
+    <form action="/auth/registrationPublisher" method="get">
+        <button type="submit">Register for Publisher</button>
+    </form>
+
+    <form action="/auth/login" method="get">
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<h1>Library Books</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>ISBN</th>
+        <th>Publication Year</th>
+        <th>Author Name</th>
+        <th>Publisher Name</th>
+        <th>Genres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.isbn}"></td>
+        <td th:text="${book.publicationYear}"></td>
+        <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
+        <td th:text="${book.publisher.publisherName}"></td>
+        <td>
+            <span th:each="genre : ${book.genres}" th:text="${genre.genreName}" th:append="' '"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

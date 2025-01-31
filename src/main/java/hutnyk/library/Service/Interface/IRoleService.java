@@ -1,4 +1,4 @@
-package hutnyk.library.Service;
+package hutnyk.library.Service.Interface;
 
 import hutnyk.library.model.Role;
 

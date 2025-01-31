@@ -1,25 +1,27 @@
 package hutnyk.library.Service;
 
 import hutnyk.library.Security.CustomUserDetails;
+import hutnyk.library.Service.Interface.IUserService;
+import hutnyk.library.model.Role;
 import hutnyk.library.model.User;
+import hutnyk.library.repository.IRoleRepository;
 import hutnyk.library.repository.IUserRepository;
-import lombok.Getter;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Getter
-@Setter
 @Service
 public class UserService implements IUserService, UserDetailsService {
 
-    private IUserRepository userRepository;
+    private final IUserRepository userRepository;
+    private final IRoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,6 +40,28 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     public void saveUser(User user){
+        userRepository.save(user);
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void addRoleToUser(String username, String roleName) {
+        User user = userRepository.getUserByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found: " + username));
+        Role role = roleRepository.getRoleByName(roleName)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found: " + roleName));
+        user.getRoles().add(role);
+        userRepository.save(user);
+    }
+
+    public void removeRoleFromUser(String username, String roleName) {
+        User user = userRepository.getUserByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User not found: " + username));
+        Role role = roleRepository.getRoleByName(roleName)
+                .orElseThrow(() -> new EntityNotFoundException("Role not found: " + roleName));
+        user.getRoles().remove(role);
         userRepository.save(user);
     }
 
