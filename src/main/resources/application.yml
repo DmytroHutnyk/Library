@@ -16,7 +16,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+#    show-sql: true
     defer-datasource-initialization: true
     properties:
       hibernate:
@@ -30,10 +30,10 @@ server:
     session:
       persistent: false
 
-logging:
-  level:
-    org:
-      springframework:
-        web: debug
-      thymeleaf:
-        web: debug
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: debug
+#      thymeleaf:
+#        web: debug
