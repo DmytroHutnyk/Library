@@ -32,7 +32,9 @@ The application includes predefined user accounts for testing:
 ## Technologies Used
 - **Java 23**
 - **Spring Boot**
+- **Spring Web (Spring MVC)** 
 - **Spring Data JPA**
+- **Hibernate**
 - **Spring Security**
 - **Gradle**
 - **H2 Database**
@@ -65,11 +67,11 @@ cd /path/to/your/project
 ### 3. Build the Project
 Use the Gradle wrapper to build the application:
 
-- **macOS/Linux & PowerShell:c**:
+- **macOS/Linux & Windows(PowerShell):**:
   ```bash
   ./gradlew build
   ```
-- **Windows (CMD only):**:
+- **Windows (CMD only):**
   ```bash
   gradlew build
   ```
