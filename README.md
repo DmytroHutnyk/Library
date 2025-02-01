@@ -10,9 +10,24 @@ The system supports four predefined user roles, each with specific permissions:
 - **Librarian:** Can add, edit, and delete books.
 - **Admin:** Full access, including user role management in the Admin Panel.
 
+Users can register as either a Reader or a Publisher.  
+
 The application is built using the Spring Framework, with Spring Boot for backend development and
 Spring Data JPA for database interaction. 
 Thymeleaf is used for server-side rendering, and data is stored in an H2 in-file database.
+
+## Default Test Accounts
+The application includes predefined user accounts for testing:
+
+| Role       | Username   | Password    |
+|------------|-----------|-------------|
+| **Reader**  | `user1`   | `1234`      |
+| **Publisher** | `user2` | `qwerty`    |
+| **Librarian** | `user3`  | `pjatk` |
+| **Admin** | `admin`  | `asd3` |
+
+⚠️ **Passwords are for local testing only.** 
+
 
 ## Technologies Used
 - **Java 23**
