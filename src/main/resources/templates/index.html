@@ -100,30 +100,33 @@
 
 <h1>Library Books</h1>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>ISBN</th>
-        <th>Publication Year</th>
-        <th>Author Name</th>
-        <th>Publisher Name</th>
-        <th>Genres</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.isbn}"></td>
-        <td th:text="${book.publicationYear}"></td>
-        <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
-        <td th:text="${book.publisher.publisherName}"></td>
-        <td>
-            <span th:each="genre : ${book.genres}" th:text="${genre.genreName}" th:append="' '"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div style="max-height: 700px; overflow-y: auto; border: 1px solid #ccc;">
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead style="position: sticky; top: 0; background: white; z-index: 10;">
+        <tr>
+            <th>Title</th>
+            <th>ISBN</th>
+            <th>Publication Year</th>
+            <th>Author Name</th>
+            <th>Publisher Name</th>
+            <th>Genres</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.publicationYear}"></td>
+            <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
+            <td th:text="${book.publisher.publisherName}"></td>
+            <td>
+                <span th:each="genre : ${book.genres}" th:text="${genre.genreName}" th:append="' '"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 </body>
 </html>

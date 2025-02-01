@@ -116,42 +116,45 @@
 
 <a th:href="@{/menu/add}" class="yellow-button">Add New Book</a>
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>ISBN</th>
-        <th>Publication Year</th>
-        <th>Author Name</th>
-        <th>Publisher Name</th>
-        <th>Genres</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="book : ${books}">
-        <td th:text="${book.title}"></td>
-        <td th:text="${book.isbn}"></td>
-        <td th:text="${book.publicationYear}"></td>
-        <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
-        <td th:text="${book.publisher.publisherName}"></td>
-        <td>
-            <span th:each="genre : ${book.genres}" th:text="${genre.genreName}" th:append="' '"></span>
-        </td>
-        <td class="actions">
-            <form th:action="@{/menu/edit/{id}(id=${book.id})}" method="get">
-                <button type="submit" class="yellow-button">Edit</button>
-            </form>
+<div style="max-height: 600px; overflow-y: auto; border: 1px solid #ccc; margin-top: 10px;">
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+        <thead style="position: sticky; top: 0; background: white; z-index: 10;">
+        <tr>
+            <th>Title</th>
+            <th>ISBN</th>
+            <th>Publication Year</th>
+            <th>Author Name</th>
+            <th>Publisher Name</th>
+            <th>Genres</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.publicationYear}"></td>
+            <td th:text="${book.author.firstName + ' ' + book.author.lastName}"></td>
+            <td th:text="${book.publisher.publisherName}"></td>
+            <td>
+                <span th:each="genre : ${book.genres}" th:text="${genre.genreName}" th:append="' '"></span>
+            </td>
+            <td class="actions">
+                <form th:action="@{/menu/edit/{id}(id=${book.id})}" method="get">
+                    <button type="submit" class="yellow-button">Edit</button>
+                </form>
 
-            <form th:action="@{/menu/delete/{id}(id=${book.id})}" method="post" onsubmit="return confirm('Are you sure?')">
-                <input type="hidden" name="_method" value="delete" />
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                <button type="submit" class="red-button">Delete</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                <form th:action="@{/menu/delete/{id}(id=${book.id})}" method="post" onsubmit="return confirm('Are you sure?')">
+                    <input type="hidden" name="_method" value="delete" />
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit" class="red-button">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <a th:href="@{/auth/logout}" class="red-button" style="margin-top: 20px;">Log Out</a>
 
