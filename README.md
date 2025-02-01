@@ -26,8 +26,6 @@ The application includes predefined user accounts for testing:
 | **Librarian** | `user3`  | `pjatk` |
 | **Admin** | `admin`  | `asd3` |
 
-⚠️ **Passwords are for local testing only.** 
-
 
 ## Technologies Used
 - **Java 23**
@@ -67,7 +65,7 @@ cd /path/to/your/project
 ### 3. Build the Project
 Use the Gradle wrapper to build the application:
 
-- **macOS/Linux & Windows(PowerShell):**:
+- **macOS/Linux & Windows(PowerShell):**
   ```bash
   ./gradlew build
   ```
@@ -83,7 +81,7 @@ This command will:
 
 Verify that the JAR file is created:
 
-- **macOS/Linux & PowerShell:**
+- **macOS/Linux & Windows(PowerShell):**
   ```bash
   ls build/libs
   ```
