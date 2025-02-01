@@ -4,7 +4,7 @@ spring:
       filter:
         enabled: true
   application:
-    name: Notes
+    name: Library
   datasource:
     url: jdbc:h2:file:./data/DB;DATABASE_TO_UPPER=false
     username: sa
