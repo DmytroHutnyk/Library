@@ -98,12 +98,6 @@ Library-0.0.1-SNAPSHOT.jar
 
 ### 4. Run the Application
 Start the application using the `java -jar` command:
-
-- **macOS/Linux & PowerShell:**
-  ```bash
+ ```bash
   java -jar build/libs/Library-0.0.1-SNAPSHOT.jar
-  ```
-- **Windows (CMD only):**
-  ```bash
-  java -jar build\libs\Library-0.0.1-SNAPSHOT.jar
   ```
