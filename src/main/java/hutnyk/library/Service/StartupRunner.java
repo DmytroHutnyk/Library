@@ -15,6 +15,9 @@ public class StartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        if (isRunningInTestMode()) {
+            return;
+        }
         System.out.println("\n Default Test Accounts:");
         System.out.println(" Reader:    Username: user1 | Password: 1234");
         System.out.println(" Publisher: Username: user2 | Password: qwerty");
@@ -40,5 +43,8 @@ public class StartupRunner implements CommandLineRunner {
         }
 
         scanner.close();
+    }
+    private boolean isRunningInTestMode() {
+        return System.getProperty("java.class.path").contains("test");
     }
 }
